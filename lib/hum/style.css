@@ -1,0 +1,780 @@
+/*
+Theme Name: Hum
+Author: Daryl Koopersmith
+Author URI: http://darylkoop.com/
+Description: Koop koop koop.
+Version: 0.1
+template: twentyeleven
+*/
+
+@import url('../twentyeleven/style.css');
+
+
+/* =========================================================================
+ *   STANDARDIZE ONE-COLUMN
+ * ========================================================================= */
+
+#page {
+	max-width: 960px;
+}
+#content {
+	margin: 0 7.6%;
+	width: auto;
+}
+#nav-below {
+	border-bottom: 1px solid #ddd;
+	margin-bottom: 1.625em;
+}
+#secondary {
+	float: none;
+	margin: 0 7.6%;
+	width: auto;
+}
+/* Simplify the showcase template */
+.page-template-showcase-php section.recent-posts {
+	float: none;
+	margin: 0;
+	width: 100%;
+}
+.page-template-showcase-php #main .widget-area {
+	float: none;
+	margin: 0;
+	width: auto;
+}
+.page-template-showcase-php .other-recent-posts {
+	border-bottom: 1px solid #ddd;
+}
+/* Simplify the showcase template when small feature */
+section.featured-post .attachment-small-feature {
+	border: none;
+	display: block;
+	height: auto;
+	max-width: 60%;
+	position: static;
+}
+article.feature-image.small {
+	margin: 0 0 1.625em;
+	padding: 0;
+}
+article.feature-image.small .entry-title {
+	font-size: 20px;
+	line-height: 1.3em;
+}
+article.feature-image.small .entry-summary {
+	height: 150px;
+	overflow: hidden;
+	padding: 0;
+	text-overflow: ellipsis;
+}
+article.feature-image.small .entry-summary a {
+	left: -9%;
+}
+/* Remove the margin on singular articles */
+.singular .entry-header,
+.singular .entry-content,
+.singular footer.entry-meta,
+.singular #comments-title {
+	width: auto;
+}
+/* Simplify the pullquotes and pull styles */
+.singular blockquote.pull {
+	margin: 0 0 1.625em;
+}
+.singular .pull.alignleft {
+	margin: 0 1.625em 0 0;
+}
+.singular .pull.alignright {
+	margin: 0 0 0 1.625em;
+}
+.singular .entry-meta .edit-link a {
+	position: absolute;
+	left: 0;
+	top: 40px;
+}
+.singular #author-info {
+	margin: 2.2em -8.8% 0;
+	padding: 20px 8.8%;
+}
+.commentlist {
+	width: auto;
+	margin-left: 102px;
+}
+#respond {
+	width: auto;
+}
+.commentlist > li.comment, .commentlist .pingback {
+	margin-left: 0;
+}
+
+/* =========================================================================
+ *   GLOBAL
+ * ========================================================================= */
+audio {
+	width: 100%;
+}
+
+/* =========================================================================
+ *   STRUCTURE
+ * ========================================================================= */
+
+#main,
+#colophon {
+	margin-left: 200px;
+}
+#branding {
+	position: fixed;
+	width: 180px;
+	margin-right: 20px;
+}
+
+#secondary {
+	display: none;
+}
+
+/* =========================================================================
+ *   COLOR ANIMATIONS
+ * ========================================================================= */
+
+#site-title a,
+#site-description,
+.entry-meta a,
+#access a,
+.entry-title a {
+	-moz-transition: color 400ms;
+	-webkit-transition: color 400ms;
+	-o-transition: color 400ms;
+	transition: color 400ms;
+}
+
+.entry-header .comments-link a {
+	-moz-transition: background-color 700ms;
+	-webkit-transition: background-color 700ms;
+	-o-transition: background-color 700ms;
+	transition: background-color 700ms;
+}
+
+#searchform,
+.format-image img {
+	-moz-transition: opacity 400ms;
+	-webkit-transition: opacity 400ms;
+	-o-transition: opacity 400ms;
+	transition: opacity 400ms;
+}
+
+/* =========================================================================
+ *   HOVERED BRANDING
+ * ========================================================================= */
+
+#branding:hover #site-title a {
+	color: rgba( 0, 0, 0, 0.2 );
+}
+
+#branding:hover #access a {
+	color: #555;
+}
+
+#branding:hover #access .current_page_item > a,
+#branding:hover #access .current_page_ancestor > a {
+	color: #222;
+}
+
+#branding:hover #site-description {
+	color: #7A7A7A;
+}
+
+#branding:hover #searchform {
+	opacity: 1;
+}
+
+/* =========================================================================
+ *   MENU
+ * ========================================================================= */
+
+#access {
+	background: transparent;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+#access div {
+	margin: 0;
+}
+#access ul {
+	margin: 0;
+}
+
+#access li {
+	float: none;
+}
+
+#access a {
+	display: inline-block;
+	color: #aaa;
+	padding: 0;
+	line-height: 2.6em;
+}
+
+#access li:hover > a,
+#access a:focus {
+	background: transparent;
+}
+
+#page #branding #access a:hover,
+#page #branding #access a:focus,
+#page #branding #access .current_page_item > a:hover,
+#page #branding #access .current_page_item > a:focus,
+#page #branding #access .current_page_ancestor > a:hover,
+#page #branding #access .current_page_ancestor > a:focus {
+	color: #1982d1;
+}
+
+/* =========================================================================
+ *   SEARCH FORM
+ * ========================================================================= */
+
+#branding #searchform {
+	position: relative;
+	top: auto;
+	right: auto;
+	overflow: hidden;
+	margin-bottom: 20px;
+	opacity: 0.6;
+}
+
+#branding #s:focus {
+	width: 140px;
+}
+
+#branding #s {
+	border-color: rgba( 255, 255, 255, 0.6 );
+	font-size: 13px;
+	font-weight: 500;
+}
+
+/* Two rules to ensure browser recognition */
+#branding #s::-webkit-input-placeholder {
+    color: rgba( 0, 0, 0, 0.4 );
+}
+#branding #s:-moz-placeholder {
+    color: rgba( 0, 0, 0, 0.4 );
+}
+
+/* =========================================================================
+ *   HEADER
+ * ========================================================================= */
+
+#branding hgroup {
+	margin: 0;
+}
+
+#site-title {
+	width: auto;
+	margin: 0;
+	padding: 10px 0 15px 0;
+}
+
+#site-title a {
+	font-size: 3.8em;
+	color: rgba( 0, 0, 0, 0.1 );
+	font-weight: 100;
+	margin-right: -4px;
+}
+
+#page #branding #site-title a:hover,
+#page #branding #site-title a:focus {
+	color: #1982d1;
+}
+
+#site-description {
+	width: auto;
+	margin: 0 0 15px;
+	color: #aaa;
+}
+
+#branding {
+	border: 0;
+	text-align: right;
+	top: 0;
+	bottom: 0;
+	padding-top: 5em;
+}
+
+.admin-bar #branding {
+	top: 28px;
+}
+
+/* =========================================================================
+ *   CONTENT
+ * ========================================================================= */
+
+#page {
+	background: transparent;
+	margin-top: 4em;
+}
+#main {
+	padding: 0;
+}
+#main #content {
+	margin: 0;
+}
+
+#content .hentry {
+	background: white;
+	-webkit-box-shadow: 0 0 10px rgba( 0, 0, 0, 0.1 );
+	-moz-box-shadow: 0 0 10px rgba( 0, 0, 0, 0.1 );
+	box-shadow: 0 0 10px rgba( 0, 0, 0, 0.1 );
+	-webkit-border-radius: 3px;
+}
+
+.entry-header .entry-format {
+	position: relative;
+	line-height: 1.4em;
+}
+
+.entry-header .comments-link a {
+	right: 7.6%;
+	top: 1.8em;
+}
+
+.hentry, .no-results {
+	border: 0;
+}
+
+.entry-title {
+	padding-top: 0;
+}
+
+.entry-meta a {
+	color: #555;
+	text-decoration: none;
+}
+.entry-meta a:hover,
+.entry-meta a:focus {
+	color: #1982d1;
+}
+
+#content .hentry {
+	padding: 0;
+}
+
+.hentry header {
+	padding: 1.625em 7.6% 0;
+}
+
+#content .hentry .entry-content {
+	padding: 0.6em 7.6% 0;
+	border-style: solid;
+	border-color: #eee;
+	border-width: 0 0 1px;
+}
+.page #content .hentry .entry-content {
+	border: 0;
+}
+
+.hentry footer {
+	padding: 1.625em 7.6%;
+	background: transparent;
+}
+
+.left-sidebar #content {
+	width: auto;
+}
+
+
+/* =========================================================================
+ *   POST FORMATS
+ * ========================================================================= */
+
+article.format-aside .entry-content,
+article.format-link .entry-content,
+article.format-status .entry-content {
+	padding: 0;
+}
+
+article.format-aside .entry-content p:last-child,
+article.format-link .entry-content p:last-child,
+article.format-status .entry-content p:last-child {
+	margin-bottom: 1em;
+}
+
+/* -------------------------------------------------------------------------
+ *   Status
+ * ------------------------------------------------------------------------- */
+article.format-status .entry-content {
+	overflow: hidden;
+	min-height: 86px;
+}
+.singular article.format-status .entry-content {
+	min-height: 0;
+}
+
+.hentry.format-status .entry-title,
+.hentry.format-aside .entry-title,
+.hentry.format-link .entry-title {
+	display: none;
+}
+
+/* -------------------------------------------------------------------------
+ *   Quote
+ * ------------------------------------------------------------------------- */
+#content .hentry.format-quote {
+	padding: 0;
+}
+
+.format-quote header {
+	padding: 1.625em 7.6% 1.5em;
+}
+
+.format-quote .entry-title {
+	display: none;
+}
+
+.format-quote header hgroup {
+	float: left;
+}
+.format-quote header .entry-format {
+	top: 1px;
+}
+
+.format-quote header .entry-meta {
+	clear: none;
+	margin-left: 15.2%;
+}
+
+#content article.format-quote header .comments-link a {
+	top: 1em;
+}
+
+#content .format-quote .entry-content {
+	padding: 1.75em 7.6% 0;
+	border-width: 1px 0;
+}
+
+.format-quote blockquote {
+	font-family: "Baskerville", "Baskerville Old Face", "Hoefler Text", "Garamond", "Palatino", "URW Palladio L", "Book Antiqua", Georgia, serif;
+	color: #333;
+	font-size: 2.2em;
+	line-height: 1.4em;
+}
+
+.format-quote blockquote p {
+	margin-bottom: 0.75em;
+}
+
+.format-quote cite {
+	display: block;
+	text-align: right;
+	margin: 1em 0 0;
+	color: #999;
+	font-size: 12px;
+	letter-spacing: 0.3em;
+	word-spacing: 0.2em;
+	line-height: 2.6em;
+	text-transform: uppercase;
+	font-style: normal;
+}
+
+/* -------------------------------------------------------------------------
+ *   Image
+ * ------------------------------------------------------------------------- */
+
+/* The first paragraph should contain the image. */
+.full-width,
+#content article.format-image .entry-content p:first-child {
+	margin: 0 -8.96226415%;
+}
+#content article.format-image .entry-content p:first-child img {
+	display: block;
+}
+
+.indexed.format-image p {
+	margin-bottom: 1.625em;
+}
+
+#content article.format-image .entry-content p:first-child + p {
+	margin-top: 1.625em;
+}
+
+.indexed.format-image footer.entry-meta a:hover {
+	color: #1982d1;
+}
+.indexed.format-image footer.entry-meta .edit-link a:hover {
+	color: #fff;
+}
+
+#content article.format-image header .entry-format {
+	position: absolute;
+	top: 2.375em;
+}
+
+#content article.format-image footer {
+	padding: 1.625em 7.6%;
+	background: transparent;
+}
+
+.indexed.format-image div.entry-meta + div.entry-meta {
+	text-align: right;
+}
+
+#content article.format-image .edit-link {
+	position: absolute;
+	bottom: 1.5em;
+}
+
+/* =========================================================================
+ *   SINGULAR
+ * ========================================================================= */
+
+#content nav {
+	padding: 0.6em 7.6%;
+}
+
+#nav-single {
+	top: 0;
+	width: 30.4%;
+}
+
+.singular .hentry header .entry-meta {
+	margin: 0;
+	padding: 1.2em 0 1.2em 7.6%;
+	left: 0;
+	right: 0;
+	border-bottom: 1px solid #eee;
+}
+
+.singular .entry-title {
+	padding: 0.6em 0 0;
+	font-size: 26px;
+	line-height: 1.6em;
+}
+
+.singular #content .hentry.format-status .entry-content,
+.singular #content .hentry.format-aside .entry-content,
+.singular #content .hentry.format-link .entry-content {
+	padding-top: 2.5em;
+}
+
+/* -------------------------------------------------------------------------
+ *   Singular Quote Format
+ * ------------------------------------------------------------------------- */
+
+.singular #content .hentry.format-quote .entry-content {
+	padding: 1.75em 7.6% 0;
+}
+.singular #content .format-quote .entry-content {
+	border-width: 0 0 1px;
+}
+
+/* -------------------------------------------------------------------------
+ *   Singular Image Format
+ * ------------------------------------------------------------------------- */
+
+.singular #content article.format-image .entry-title {
+	padding-bottom: 0.6em;
+}
+.singular #content article.format-image img {
+	max-width: 100%;
+	border: 0;
+	padding: 0;
+	margin: 0;
+}
+
+.singular #content article.format-image img:hover {
+	opacity: 0.8;
+}
+
+/* =========================================================================
+ *   COMMENTS
+ * ========================================================================= */
+
+.singular #comments-title {
+	text-align: center;
+}
+
+.commentlist .children li.comment .comment-meta {
+	margin-left: 0;
+}
+
+.commentlist .children .avatar {
+	position: relative;
+	left: 0;
+	top: 0;
+	margin: 0 10px 0 0;
+	float: left;
+}
+
+.commentlist > li.bypostauthor {
+	background: #f6f6f6;
+	border-color: #ddd;
+}
+.commentlist > li.bypostauthor:before {
+	content: url(../twentyeleven/images/comment-arrow.png);
+}
+.commentlist .children > li.bypostauthor {
+	background: #fff;
+	border-color: #ddd;
+}
+
+/* =========================================================================
+ *   FOOTER
+ * ========================================================================= */
+
+#colophon,
+#site-generator {
+	border: 0;
+	background: transparent;
+}
+
+/* Center WordPress.com Stats smiley. */
+#wpstats {
+	padding-left: 220px;
+}
+
+/* =========================================================================
+ *   ARCHIVES
+ * ========================================================================= */
+
+.page-title {
+	margin: 5.6em 0 1.6em;
+}
+
+
+/* =========================================================================
+ *   RESPONSIVE STRUCTURE
+ * ========================================================================= */
+
+@media (max-width: 800px) {
+	#main {
+		padding: 2em 0 0;
+	}
+
+	#page,
+	#branding {
+		margin-top: 0;
+		padding-top: 0;
+	}
+
+	#branding {
+		position: relative;
+		width: auto;
+		margin: 0 7.6%;
+		text-align: center;
+	}
+
+	#branding #searchform {
+		position: absolute;
+		right: 0;
+		margin-bottom: 0.3em;
+	}
+
+	#main,
+	#colophon {
+		margin-left: 0;
+	}
+
+/*	#access ul {
+		margin: 0 7.6%;
+	}
+	#access li {
+		float: left;
+		margin: 0 20px 0 0;
+	}*/
+
+	#branding #searchform {
+		position: relative;
+		right: auto;
+		top: 0 !important;
+	}
+
+	#branding #s {
+		margin: 0 auto;
+		float: none;
+		display: block;
+	}
+
+	#access ul {
+		margin: 0 7.6%;
+	}
+
+	#access li {
+		display: inline;
+		float: none;
+		margin: 0 10px;
+	}
+
+
+	/* -------------------------------------------------------------------------
+	 *   Undo hovered branding
+	 * ------------------------------------------------------------------------- */
+	#page #branding #site-title a {
+		color: rgba( 0, 0, 0, 0.2 );
+	}
+
+	#page #branding #access a {
+		color: #555;
+	}
+
+	#page #branding #access .current_page_item > a,
+	#page #branding #access .current_page_ancestor > a {
+		color: #222;
+	}
+
+	#page #branding #site-description {
+		color: #7A7A7A;
+	}
+
+	#page #branding #searchform {
+		opacity: 1;
+	}
+
+}
+
+@media (max-width: 650px) {
+
+	#branding #searchform {
+		position: relative;
+		right: auto;
+		top: 0 !important;
+	}
+
+	#branding #s {
+		margin: 0 auto;
+		float: none;
+		display: block;
+	}
+
+	#access li {
+		display: inline;
+		float: none;
+	}
+
+	.format-quote header .entry-meta {
+		margin-left: 22.8%;
+	}
+
+	.commentlist {
+		margin-left: 0;
+	}
+
+	.comment-meta {
+		overflow: hidden;
+		padding-top: 10px;
+	}
+	.commentlist li.comment .fn {
+		display: block;
+	}
+	.commentlist .avatar {
+		float: left;
+		margin-top: -10px;
+		margin-right: 10px;
+		margin-bottom: 5px;
+	}
+
+	.comment-content {
+		padding-top: 7px;
+	}
+
+}
+
+body { padding: 0 1em;
+}
