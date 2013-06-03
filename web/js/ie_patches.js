@@ -15,8 +15,7 @@ if(!ap.map){ap.map=function(fn,thisp){var l=this.length;var r=new Array(l);for(v
 if(i in this)r[i]=fn.call(thisp,this[i],i,this);return r;};}
 if(!ap.some){ap.some=function(fn,thisp){for(var i=0,l=this.length;--l>=0;i++)
 if(i in this&&fn.call(thisp,this[i],i,this))
-return true;return false;};}})(Array.prototype);/*!
-// Copyright 2006 Google Inc.
+return true;return false;};}})(Array.prototype);// Copyright 2006 Google Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,7 +28,6 @@ return true;return false;};}})(Array.prototype);/*!
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-*/
 
 
 // Known Issues:

@@ -1610,7 +1610,7 @@ eMend.linker.prototype = {
 
       $(this.opts.target).append(canvas);
 
-      if ($.browser.msie && !window.CanvasRenderingContext2D) {
+      if ($.browser.msie && !document.createElement('canvas').getContext) {
           //alert('cv');
         G_vmlCanvasManager.initElement(canvas);
         canvas = document.getElementById("EmendLinks");
