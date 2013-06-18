@@ -29,10 +29,15 @@ class JSON_API_eMend_Controller
             $comments[] = new JSON_API_Emend($wp_comment);
         }
 
+        $current_user = is_user_logged_in() ? wp_get_current_user()->display_name : 'guest';
+
         $response = array(
             'post' => array(
                 'id' => $post_id,
                 'comments' => $comments
+            ),
+            'user' => array (
+                'name' => $current_user
             )
         );
         return $response;

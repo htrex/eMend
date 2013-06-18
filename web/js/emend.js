@@ -272,6 +272,8 @@ eMend.dataset.prototype = {
 // CONTENT BACKUP
   bkpContent: function(contentEl) {
 
+    //console.count('bkpContent');
+
     this._contentBkp = [];
     if(this.opts.datastore) {
       if($('#eMend-content-backup').length == 0) {
@@ -297,6 +299,9 @@ eMend.dataset.prototype = {
   },
 
   restoreContent: function() {
+
+    //console.count('restoreContent');
+
     var parent  = this._contentEl;
     var childs = parent.childNodes, o, b=this._contentBkp, wprt = 0;
 
@@ -318,6 +323,9 @@ eMend.dataset.prototype = {
   },
 
   bkpContentOnDOM: function(contentEl) {
+
+    //console.count('bkpContentOnDOM');
+
     // creates a container in an hidden DOM zone and clones
     // content element
     var DOMbkp = $.create('div',{id:'eMend-content-backup'});
@@ -335,6 +343,9 @@ eMend.dataset.prototype = {
   },
 
   restoreContentFromDOM: function(contentEl) {
+
+    //console.count('restoreContentFromDOM');
+
     var b = $('#eMend-content-backup')[0];
     var nc = b.cloneNode(true);
     // remove anti-duplicate id suffix
@@ -347,19 +358,19 @@ eMend.dataset.prototype = {
   },
 
 // COMMENTS
-  addComment: function(subject, text, userIdx) {
+  addComment: function(text, userIdx) {
     if(typeof userIdx == 'undefined') userIdx = this._currentUser;
     var d = new Date();
     var date = d.format(Date.ISO8601c);
     var noteIdx = this._comments[userIdx].length;
     var auth = this._users[userIdx];
-    subject = $.escapeReturns(subject);
+    //subject = $.escapeReturns(subject);
     text = $.escapeReturns(text);
 
     var status = 0;
     var commentdata = {
       author: auth,
-      title: subject,
+      //title: subject,
       body: text,
       date: date,
       userIdx: userIdx,
@@ -512,6 +523,10 @@ eMend.dataset.prototype = {
     var userIdx = this._usersByName[name];
     if(userIdx >= 0) return userIdx;
     return this.addUser(name);
+  },
+
+  getCurrentUser: function() {
+      return this._currentUser;
   },
 
   loginAsGuest: function() {
@@ -681,8 +696,7 @@ eMend.dataset.prototype = {
   },
 
   markNodeMap: function() {
-    //LOG('markNodeMap');
-    //LOG(arguments.callee.caller.valueOf);
+    //console.log('markNodeMap');
 
     var groupSel = this._selections
       , groupCom = this._comments
@@ -739,18 +753,18 @@ eMend.dataset.prototype = {
           case 0:
             cSel = XcS.base == '__noId__' ? document.body : document.getElementById(XcS.base);
             cEel = XcE.base == '__noId__' ? document.body : document.getElementById(XcE.base);
-	    try {
-            cS = document.evaluate(XcS.xpath,cSel,null,XPathResult.FIRST_ORDERED_NODE_TYPE,null).singleNodeValue;
-            cE = document.evaluate(XcE.xpath,cEel,null,XPathResult.FIRST_ORDERED_NODE_TYPE,null).singleNodeValue;
-	    } catch (err) {
-	      if(eMend.log) {
-            err = {};
-            err.funct = 'markNodeMap';
-            err.msg = "invalid XPATH expression: "+XcS.xpath+" "+XcE.xpath;
-			eMend.log.add('error',err);
-	      }
-	      continue;
-	    }
+            try {
+                cS = document.evaluate(XcS.xpath,cSel,null,XPathResult.FIRST_ORDERED_NODE_TYPE,null).singleNodeValue;
+                cE = document.evaluate(XcE.xpath,cEel,null,XPathResult.FIRST_ORDERED_NODE_TYPE,null).singleNodeValue;
+            } catch (err) {
+              if(eMend.log) {
+                err = {};
+                err.funct = 'markNodeMap';
+                err.msg = "invalid XPATH expression: "+XcS.xpath+" "+XcE.xpath;
+                eMend.log.add('error',err);
+              }
+	          continue;
+	        }
           break;
 
           case 1:
@@ -1324,8 +1338,17 @@ eMend.commentForm = function (options) {
 	this.active = false;
 	this.template = $.template(eMend.templates.commentForm,{ regx: 'gettext' }).apply(eMend.dictionary.commentForm);
 	//this.create();
-    $(document).bind('ajaxSuccess', function(o){
-       setTimeout(function(){$.modal.close();}, 2000);
+
+    var _self = this;
+
+    $(document).bind('ajaxSuccess', function(event, xhr, settings){
+        if(settings.url.indexOf('/wp-comments-post.php') != -1) {
+            //console.log(event, xhr, settings);
+            var user = _self.dataset.getCurrentUser();
+            var text = _self.commentText;
+            _self.dataset.addComment(text,user);
+            setTimeout(function(){$.modal.close(); }, 2000);
+        }
     });
 }
 
@@ -1335,22 +1358,30 @@ eMend.commentForm.prototype = {
 	show: function() {
         var _self = this;
 		this.active = true;
-		//console.log(this.dataset);
 		var sel = this.dataset.addSelection();
         $('#emend_comment_selection').val($.toJSON(sel));
-		//if(!$('#NoteFormContainer')[0]) this.create();
-		//$('#noteSubject').attr('value','');
-		//$('#noteText').attr('value','');
-		//$('#NoteFormContainer').jqm({modal:true}).jqmShow();
+
+        var catchText = function() {
+            _self.commentText = $('#commentform #comment').val();
+            //console.log('comment',_self.commentText);
+        };
+
         $('#respond').modal({
             overlayClose: true,
             autoResize: true,
-            onClose: function(){_self.cancel()}
+            onClose: function(){
+                _self.cancel();
+                $('#commentform #comment').unbind('blur', catchText );
+            }
         });
+        $('#commentform #comment').bind('blur', catchText );
+
+
         //$('#NoteFormContainer').modal();
 		
 		//window.focus(); $('#noteSubject')[0].focus(); // AARGH, ie needs a double focus change
 	},
+
 	submit: function() {
 		var s = $('#noteSubject').attr('value');
 		var t = $('#noteText').attr('value');
@@ -2142,6 +2173,8 @@ eMend.renderNotes = function (options) {
 	);
 
     $(this.container).mousewheel(function(event, delta) {
+
+        console.log(delta);
         if (delta > 0) {
             _self.goToNextNote();
         } else {
@@ -2161,6 +2194,8 @@ eMend.renderNotes.prototype = {
 	},
 	
 	renderNotes: function() {
+
+        console.count('renderNotes');
 		
 		var container = this.container;
 		
@@ -2265,7 +2300,7 @@ eMend.renderNotes.prototype = {
 			$('#noteGroup'+nodeGroup).remove();
 		}
 		
-		var spaceHolder = $.create('div',{className:'noteGroup'});
+		var spaceHolder = $.create('div',{'class':'noteGroup'});
 		$(spaceHolder).css({height:'50px', visibility:'hidden'});
 		container.appendChild(spaceHolder[0]);
 		
@@ -2560,6 +2595,8 @@ eMend.backstore.firebugEmendPluginLog.prototype = {
                         return tmp.textContent || tmp.innerText;
                     }
 
+                    ds.loginAs(data.user.name);
+
                     var obj = data.post.comments;
                     //console.log(obj);
                     for (var i = 0; i < obj.length; i++) {
@@ -2750,7 +2787,7 @@ eMend.init = function($) {
       break;
       case "wpEmendPlugin":
           var wpbk = eMend.backstore.wpEmendPlugin({dataset: ds});
-          $(document).bind('emend.addComment',function(){ wpbk.addComment(); });
+          //$(document).bind('emend.addComment',function(){ wpbk.addComment(); });
       break;
     }
   };
@@ -2774,7 +2811,9 @@ eMend.init = function($) {
   // invalidate position cache when highlights are updated
       , F_updHL = function(event, data){ ps.invalidate('highlights','references'); }
   // refresh highlights and sidebar notes
-      , F_refRender = function(event, data){ eMend.highlight(ds); rn.renderNotes(); }
+      , F_refRender = function(event, data){
+            eMend.highlight(ds); rn.renderNotes();
+        }
   // open sidebar
       , F_openSB = function(event, data){ SB.open(); }
   // sends an event 450ms after scroll is over
@@ -2823,7 +2862,7 @@ eMend.init = function($) {
 // when a comment is posted
 
     // refresh render
-	$(document).bind('emend.addComment',F_refRender);
+	$(document).bind('emend.addComment',function(){ F_refRender(); });
 
     // shows a GUI message
 	$(document).bind('emend.addComment',function(){ ct.show(0); });
@@ -2836,7 +2875,7 @@ eMend.init = function($) {
 // when a comment form is cancelled
 
     // refresh render
-    $(document).bind('emend.cancelForm',function(){ F_refLinks(); F_refRender(); });
+    //$(document).bind('emend.cancelForm',function(){ F_refLinks(); F_refRender(); }); // NOT NEEDED
 
 
 

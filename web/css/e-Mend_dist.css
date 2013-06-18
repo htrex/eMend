@@ -98,7 +98,7 @@ WP HUM SPECIFIC STYLES
 #sidebar-body #respond { display: block; }
 #respond input[type="text"], #respond textarea { padding: 5px; }
 #comments, ol.commentlist { display: none; }
-#respond .comment-form-author label, #respond .comment-form-email label, #respond .comment-form-url label, #respond .comment-form-comment label {  box-shadow: none; position: static; float: left; margin-top: 2px; width: 80px; }
+#respond .comment-form-author label, #respond .comment-form-email label, #respond .comment-form-url label, #respond .comment-form-comment label {  box-shadow: none; position: static; margin-top: 2px; width: 80px; }
 #respond .form-allowed-tags { font-size: 10px; }
 #respond textarea { max-width: 540px; }
 #respond .comment-form-author .required, #respond .comment-form-email .required { position: static; float: right;}
@@ -367,6 +367,8 @@ NOTE
      clear: none;
      margin: 2px 2px 2px 0;
 }
+
+.noteGroup:last-child { margin-bottom: 50px; }
 
 .noteGroup.minify img{ display: none; }
 .noteGroup.minify h6 { font-weight: normal; }
